@@ -80,8 +80,6 @@ class MainActivity : AppCompatActivity() {
         // Setup dessertTimer, passing in the lifecycle
         dessertTimer = DessertTimer(this.lifecycle)
 
-        // If there is a savedInstanceState bundle, then you're "restarting" the activity
-        // If there isn't a bundle, then it's a "fresh" start
         if (savedInstanceState != null) {
             revenue = savedInstanceState.getInt(KEY_REVENUE, 0)
             dessertsSold = savedInstanceState.getInt(KEY_DESSERT_SOLD, 0)
@@ -124,10 +122,6 @@ class MainActivity : AppCompatActivity() {
             if (dessertsSold >= dessert.startProductionAmount) {
                 newDessert = dessert
             }
-            // The list of desserts is sorted by startProductionAmount. As you sell more desserts,
-            // you'll start producing more expensive desserts as determined by startProductionAmount
-            // We know to break as soon as we see a dessert who's "startProductionAmount" is greater
-            // than the amount sold.
             else break
         }
 
@@ -176,6 +170,7 @@ class MainActivity : AppCompatActivity() {
         outState.putInt(KEY_DESSERT_SOLD, dessertsSold)
         outState.putInt(KEY_TIMER_SECONDS, dessertTimer.secondsCount)
     }
+
 
     /** Lifecycle Methods **/
     override fun onStart() {
